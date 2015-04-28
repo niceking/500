@@ -1,3 +1,6 @@
+
+require File.expand_path '../card', __FILE__
+
 class Hand
 
   attr_accessor :hand
@@ -12,33 +15,46 @@ class Hand
   def initialize
     @hand = []
     self.generate_hand
-    self.sort_hand
   end
 
   def generate_hand
     dealer = Random.new
 
     while (@hand.size < 10) do
-      card = DECK[dealer.rand(10)]
+      card = Card.new(DECK[dealer.rand(43)])
       @hand.push(card) unless @hand.include?(card)
     end
+
+    # self.sort_hand_by_suit
   end
 
-  def sort_hand
-    hearts, diamonds, clubs, spades = []
+  def sort_hand_by_suit
+    hearts, diamonds, clubs, spades = Array.new(4) { [] }
 
     @hand.each do |card|
-      if card.include? "H"
-        @hearts.push(card)
-      elsif card.include? "D"
-        @hearts.push(card)
-      elsif card.include? "C"
-        @hearts.push(card)
-      elsif card.include? "S"
-        @hearts.push(card)
+      if card.suit "H"
+        hearts.push(card)
+      elsif card.suit "D"
+        diamonds.push(card)
+      elsif card.suit "C"
+        clubs.push(card)
+      elsif card.suit "S"
+        spades.push(card)
       end
-
     end 
+
+    puts "Here is your sorted hand"
+    puts hearts
+    puts diamonds
+    puts clubs
+    puts spades
+
+  end
+
+  def sort_hand_by_size cards
+    cards.each do |card|
+
+    end
   end
 
 end 

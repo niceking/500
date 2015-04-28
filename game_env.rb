@@ -1,4 +1,5 @@
 require File.expand_path '../hand', __FILE__
+require File.expand_path '../card', __FILE__
 
 puts "Hi welcome to 500"
 
