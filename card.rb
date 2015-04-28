@@ -1,14 +1,16 @@
 class Card
+  #todo map value to numerical value
   SUIT = ["Hearts", "Diamonds", "Spades", "Clubs"]
   VALUE = ["A", "K", "Q", "J", "T", 9, 8, 7, 6, 5, 4]
 
-  attr_accessor :suit, :value, :joker 
+  attr_accessor :suit, :value 
 
   def initialize card_string
     if card_string == "*"
       @value = "Joker"
-      @suit = "None"
+      @suit = "Joker"
       @joker = true
+    #todo reject card strings that are invalid
     else
       @value = card_string[0]
       @suit = card_string[1]
@@ -28,12 +30,18 @@ class Card
     end
   end
 
+  def is_joker?
+    return @joker
+  end
+
   def to_s
     if @joker
-      puts "*"
+      return "*"
     else
-      puts "#{@value}#{@suit}"
+      return "#{@value}#{@suit}"
     end 
   end
+
+
 
 end
