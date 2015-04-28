@@ -13,13 +13,66 @@ class Deck
 
 
   def initialize
-    @unallocated, @north, @east, @south, @west, @discard, @kitty = Array.new(7) { [] }
-
-    FIVE_HUNDRED_DECK.each do |card|
-      @unallocated.push(Card.new(card))
-    end
-
-    # puts @unallocated
+    setup
   end
+
+  def reset
+    setup
+  end
+
+  def shuffle
+    if self.is_deck_dealt?
+      puts "Error deck has cards missing"
+      return false
+    else
+      @unallocated = @unallocated.shuffle
+    end
+  end
+
+  def deal
+    if self.is_deck_dealt?
+      puts "Error deck has cards missing"
+      return false
+    else
+      #dealing in the traditonal 500 manner
+      @north += @unallocated.pop(3)
+      @east += @unallocated.pop(3)
+      @south += @unallocated.pop(3)
+      @west += @unallocated.pop(3)
+      @kitty += @unallocated.pop(1)
+
+      @north += @unallocated.pop(4)
+      @east += @unallocated.pop(4)
+      @south += @unallocated.pop(4)
+      @west += @unallocated.pop(4)
+      @kitty += @unallocated.pop(1)
+
+      @north += @unallocated.pop(3)
+      @east += @unallocated.pop(3)
+      @south += @unallocated.pop(3)
+      @west += @unallocated.pop(3)
+      @kitty += @unallocated.pop(1)
+    end
+  end
+
+  def is_deck_dealt?
+    if (@unallocated.length == 43) && (@north.length == 0) && (@east.length == 0) && (@south.length == 0) && (@west.length == 0) && (@kitty.length == 0) && (@discard.length == 0)
+      return false
+    else
+      return true
+    end
+  end
+
+  private 
+
+    def setup
+      @unallocated, @north, @east, @south, @west, @discard, @kitty = Array.new(7) { [] }
+
+      FIVE_HUNDRED_DECK.each do |card|
+        @unallocated.push(Card.new(card))
+      end
+      
+      self.shuffle
+    end
 
 end 
