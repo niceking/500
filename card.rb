@@ -1,32 +1,36 @@
 class Card
-  #todo map value to numerical value
-  SUIT = ["Hearts", "Diamonds", "Spades", "Clubs"]
-  VALUE = ["A", "K", "Q", "J", "T", 9, 8, 7, 6, 5, 4]
+
+  CARD_STR_TO_SUIT = {"H" => "Hearts", 
+                      "D" => "Diamonds",
+                      "S" => "Spades",
+                      "C" => "Clubs",
+                      "Joker" => "Joker"}
+
+  CARD_STR_TO_VALUE = {"Joker" => "Joker",
+                        "A" => 14,
+                        "K" => 13,
+                        "Q" => 12,
+                        "J" => 11,
+                        "T" => 10,
+                        "9" => 9,
+                        "8" => 8,
+                        "7" => 7,
+                        "6" => 6,
+                        "5" => 5,
+                        "4" => 4}
 
   attr_accessor :suit, :value 
 
   def initialize card_string
     if card_string == "*"
-      @value = "Joker"
-      @suit = "Joker"
+      @value = CARD_STR_TO_VALUE["Joker"]
+      @suit = CARD_STR_TO_SUIT["Joker"]
       @joker = true
     #todo reject card strings that are invalid
     else
-      @value = card_string[0]
-      @suit = card_string[1]
+      @value = CARD_STR_TO_VALUE[card_string[0]]
+      @suit = CARD_STR_TO_SUIT[card_string[1]]
       @joker = false
-    end
-  end
-
-  def card_string_to_suit cs 
-    if cs == "H"
-      return "Hearts"
-    elsif cs == "D"
-      return "Diamonds"
-    elsif cs == "C"
-      return "Clubs"
-    elsif cs == "S"
-      return "Spades"
     end
   end
 
@@ -38,8 +42,22 @@ class Card
     if @joker
       return "*"
     else
-      return "#{@value}#{@suit}"
+      return "#{CARD_STR_TO_VALUE.key(@value)}#{CARD_STR_TO_SUIT.key(@suit)}"
     end 
+  end
+
+  def > other_card
+    if @suit != other_card.suit
+      puts "cannot compare cards of different suits"
+      return nil
+    elsif @value > other_card.value
+      return true
+    elsif @value < other_card.value
+      return false
+    else
+      puts "Error! Are cards the same, or one a joker?"
+      return nil
+    end
   end
 
 
