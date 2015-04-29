@@ -1,7 +1,7 @@
 
-require File.expand_path '../card', __FILE__
+require File.expand_path '../deck', __FILE__
 
-class Hand
+class Player
 
   attr_accessor :hand
   
@@ -12,20 +12,8 @@ class Hand
           "AS", "KS", "QS", "JS", "TS", "9S", "8S", "7S", "6S", "5S" 
         ]
 
-  def initialize
-    @hand = []
-    self.generate_hand
-  end
-
-  def generate_hand
-    dealer = Random.new
-
-    while (@hand.size < 10) do
-      card = Card.new(DECK[dealer.rand(43)])
-      @hand.push(card) unless @hand.include?(card)
-    end
-
-    # self.sort_hand_by_suit
+  def initialize dealt_hand
+    @hand = dealt_hand
   end
 
   def sort_hand_by_suit

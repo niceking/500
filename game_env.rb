@@ -1,13 +1,15 @@
-require File.expand_path '../hand', __FILE__
-require File.expand_path '../card', __FILE__
+require File.expand_path '../player', __FILE__
 
 puts "Hi welcome to 500"
 
-myHand = Hand.new
+deck = Deck.new
+deck.deal
+
+player = Player.new(deck.north)
 
 puts "Here is your hand"
 
-puts myHand.hand
+puts player.hand
 
 puts "What is your bid?"
 
