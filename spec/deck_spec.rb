@@ -19,7 +19,6 @@ describe Deck do
 
     it "can deal out the cards" do
       deck = Deck.new
-      deck.shuffle
       deck.deal
 
       expect(deck.unallocated.length).to eq 0
