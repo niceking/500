@@ -27,4 +27,12 @@ describe Player do
       expect(player.hand).to eq sorted_cards
     end
   end
+
+  describe 'can play cards' do
+    it "can play a card that is in their hand" do
+      player = FactoryGirl.create(:player)
+
+      played_card = player.play "4D"
+    end
+  end
 end
