@@ -1,16 +1,14 @@
 require File.expand_path '../card', __FILE__
 
 class Deck
-
-  FIVE_HUNDRED_DECK = ["*", 
-              "AH", "KH", "QH", "JH", "TH", "9H", "8H", "7H", "6H", "5H", "4H", 
-              "AD", "KD", "QD", "JD", "TD", "9D", "8D", "7D", "6D", "5D", "4D", 
-              "AC", "KC", "QC", "JC", "TC", "9C", "8C", "7C", "6C", "5C",  
-              "AS", "KS", "QS", "JS", "TS", "9S", "8S", "7S", "6S", "5S" 
+  FIVE_HUNDRED_DECK = ['*',
+              'AH', 'KH', 'QH', 'JH', 'TH', '9H', '8H', '7H', '6H', '5H', '4H',
+              'AD', 'KD', 'QD', 'JD', 'TD', '9D', '8D', '7D', '6D', '5D', '4D',
+              'AC', 'KC', 'QC', 'JC', 'TC', '9C', '8C', '7C', '6C', '5C',
+              'AS', 'KS', 'QS', 'JS', 'TS', '9S', '8S', '7S', '6S', '5S'
             ]
 
   attr_accessor :unallocated, :north, :east, :south, :west, :discard, :kitty
-
 
   def initialize
     setup
@@ -22,7 +20,7 @@ class Deck
 
   def shuffle
     if self.is_deck_dealt?
-      puts "Error deck has cards missing"
+      puts 'Error deck has cards missing'
       return false
     else
       @unallocated = @unallocated.shuffle
@@ -31,10 +29,10 @@ class Deck
 
   def deal
     if self.is_deck_dealt?
-      puts "Error deck has cards missing"
+      puts 'Error deck has cards missing'
       return false
     else
-      #dealing in the traditonal 500 manner
+      # dealing in the traditonal 500 manner
       @north += @unallocated.pop(3)
       @east += @unallocated.pop(3)
       @south += @unallocated.pop(3)
@@ -63,7 +61,7 @@ class Deck
     end
   end
 
-  private 
+  private
 
     def setup
       @unallocated, @north, @east, @south, @west, @discard, @kitty = Array.new(7) { [] }
@@ -71,8 +69,6 @@ class Deck
       FIVE_HUNDRED_DECK.each do |card|
         @unallocated.push(Card.new(card))
       end
-      
       self.shuffle
     end
-
-end 
+end
