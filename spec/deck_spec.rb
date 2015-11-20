@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Deck do
-  describe 'can make a deck of cards' do
+  context 'can make a deck of cards' do
     it 'can make a new 500 deck' do
       deck = Deck.new
       expect(deck.unallocated.length).to eq 43

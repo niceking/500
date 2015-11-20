@@ -1,4 +1,6 @@
 require File.expand_path '../player', __FILE__
+require File.expand_path '../bid', __FILE__
+require File.expand_path '../bidding_manager', __FILE__
 
 # ---------------------------------
 # SETUP
@@ -8,36 +10,31 @@ puts 'Hi welcome to 500'
 deck = Deck.new
 deck.deal
 
-player = Player.new(deck.north)
+rose = Player.new(dealt_hand: deck.north, name: 'North', position: :north)
+jared = Player.new(dealt_hand: deck.east, name: 'East', position: :east)
+simon = Player.new(dealt_hand: deck.south, name: 'South', position: :south)
+tim = Player.new(dealt_hand: deck.west, name: 'West', position: :west)
 
 puts 'Here is your hand'
 
 # make the hand look prettier
-puts player.hand
+puts rose.hand
 
 # ---------------------------------
 # BIDDING
 
-puts 'What is your bid?'
+bm = BiddingManager.new(starting_player: rose,
+                        other_players: [jared, tim, simon])
 
-bid = gets
+bm.do_bidding
 
-puts 'You have bid #{bid}'
-
-# do the bidding thing
-
-puts 'Bidding has now ended. You are now playing for #{bid}'
+puts "Bidding has now ended. You are now playing for #{bm.winning_bid}, made by #{bm.winning_bidder.name}"
 
 # kitty?
 
 # ---------------------------------
 # GAME PLAY
 
-puts 'It is your turn. Please choose a card to play'
-
-puts player.hand
-
-card = gets
 
 # ---------------------------------
 # SCORING
