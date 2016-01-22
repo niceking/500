@@ -19,6 +19,9 @@ puts 'Here is your hand'
 
 # make the hand look prettier
 puts rose.hand
+# puts jared.hand
+# puts simon.hand
+# puts tim.hand
 
 # ---------------------------------
 # BIDDING
